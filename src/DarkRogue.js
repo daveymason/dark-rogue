@@ -1,6 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react';
 import InputManager from './InputManager.js';
 import Player from './Player.js';
+import Spawner from './Spawner.js';
 import World from './World.js';
 
 const DarkRogue = ({width, height, tilesize}) => {
@@ -25,6 +26,8 @@ const DarkRogue = ({width, height, tilesize}) => {
         Object.assign(newWorld, world);
         newWorld.createCellularMap();
         newWorld.moveToSpace(world.player);
+        let spawner = new Spawner(newWorld);
+        spawner.spawnLoot(10);
         setWorld(newWorld);
     },[]);
 
@@ -45,13 +48,20 @@ const DarkRogue = ({width, height, tilesize}) => {
         world.draw(ctx);
     });
 
-    return(
+    return (
+   <>
     <canvas 
         ref={canvasRef}
         width={width * tilesize}
         height={height * tilesize}
-        style={{border: '3px solid black'}}>
-    </canvas>
+        style={{border: '3px solid black', background: 'dimgrey'}}
+    ></canvas>
+    <ul>
+        {world.player.inventory.map((item,index) => (
+        <li key={index}>{item.attributes.name}</li>
+        ))}
+    </ul>
+    </>
     );
 };
 

@@ -1,8 +1,13 @@
-class Player{
-    constructor(x,y,size){
-        this.x = x;
-        this.y = y;
-        this.size=size;
+import Entity from './Entity.js';
+
+
+class Player extends Entity{
+inventory = [];
+
+    attributes = {
+        name: 'Player',
+        ascii: '@',   //Change this
+        health: 10
     }
 
     move (dx, dy){
@@ -10,13 +15,10 @@ class Player{
         this.y += dy;
     }
 
-    draw(context){
-        context.fillStyle = '#f00';
-        context.textBaseline = 'hanging';
-        context.font = '16px Helvetica';
-        context.fillText('@',this.x * this.size, this.y * this.size);
+    add(item){
+        this.inventory.push(item);
     }
-
+    
     copyPlayer(){
         let newPlayer = new Player();
         Object.assign(newPlayer, this);
