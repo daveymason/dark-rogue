@@ -6,7 +6,7 @@ import Spawner from './Spawner.js';
             name: 'Stairs',
             color: 'green',
             ascii: '>',
-            offset: {x:8, y:2}
+            offset: { x: 2, y: 2 }
     };
 
     action(verb, world) {
@@ -18,9 +18,9 @@ import Spawner from './Spawner.js';
             world.moveToSpace(world.player);
             world.entities = world.entites.filter(e => e === world.player);
             let spawner = new Spawner(world);
-            spawner.spawnLoot(10);
+            spawner.spawnLoot(6);
             spawner.spawnMonsters(6);
-            spawner.spawnStairs(0);
+            spawner.spawnStairs();
         }
     }
 }
