@@ -28,6 +28,7 @@ const DarkRogue = ({width, height, tilesize}) => {
         newWorld.moveToSpace(world.player);
         let spawner = new Spawner(newWorld);
         spawner.spawnLoot(10);
+        spawner.spawnMonsters(6);
         setWorld(newWorld);
     },[]);
 
@@ -59,6 +60,12 @@ const DarkRogue = ({width, height, tilesize}) => {
     <ul>
         {world.player.inventory.map((item,index) => (
         <li key={index}>{item.attributes.name}</li>
+        ))}
+    </ul>
+
+    <ul>
+        {world.history.map((item,index) => (
+        <li key={index}>{item}</li>
         ))}
     </ul>
     </>
